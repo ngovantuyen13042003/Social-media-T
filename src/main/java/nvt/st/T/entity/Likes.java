@@ -1,9 +1,7 @@
 package nvt.st.T.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
 import nvt.st.T.entity.account.User;
 import nvt.st.T.entity.chats.Messages;
 import nvt.st.T.entity.post.Comment;
@@ -11,8 +9,13 @@ import nvt.st.T.entity.post.Pages;
 import nvt.st.T.entity.post.Posts;
 
 @Entity
+@Data
 @Table(name = "likes")
 public class Likes extends BaseEntity{
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "likeType")
+    private ELikeType likeType;
 
     @ManyToOne
     @JoinColumn(name = "post_id")

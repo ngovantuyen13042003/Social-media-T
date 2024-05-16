@@ -1,4 +1,4 @@
-package nvt.st.T.dto.authentication;
+package nvt.st.T.dto.auth;
 
 import lombok.Data;
 

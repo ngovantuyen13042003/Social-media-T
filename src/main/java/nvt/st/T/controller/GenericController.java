@@ -22,6 +22,7 @@ import java.util.List;
 public class GenericController<I, O> {
     private CrudService<Long, I, O> crudService;
     private Class<I> requestType;
+
     public ResponseEntity<ListResponse<O>> getAllResources(
             @RequestParam(name = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
             @RequestParam(name = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size,

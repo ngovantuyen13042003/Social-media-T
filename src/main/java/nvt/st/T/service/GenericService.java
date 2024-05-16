@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @Scope("prototype")
 public class GenericService<E, I, O> implements CrudService<Long, I, O>{
+
     private JpaRepository<E, Long> repository;
     private JpaSpecificationExecutor<E> specificationExecutor;
     private GenericMapper<E, I, O> mapper;
@@ -21,11 +22,10 @@ public class GenericService<E, I, O> implements CrudService<Long, I, O>{
     private String resourceName;
 
     public <R extends JpaRepository<E, Long> & JpaSpecificationExecutor<E>> GenericService<E, I, O> init(
-        R repository,
-        GenericMapper<E, I, O> mapper,
-        List<String> searchFields,
-        String resourceName
-    ) {
+            R repository,
+            GenericMapper<E, I, O> mapper,
+            List<String> searchFields,
+            String resourceName) {
         this.setRepository(repository);
         this.setSpecificationExecutor(repository);
         this.setMapper(mapper);

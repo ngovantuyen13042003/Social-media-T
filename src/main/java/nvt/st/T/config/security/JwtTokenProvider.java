@@ -16,7 +16,7 @@ public class JwtTokenProvider {
     @Value("${com.app.jwt.jwtSecret}")
     private String jwtSecret;
     @Value("${com.app.jwt.jwtExpiration}")
-    private String jwtExpiration;
+    private int jwtExpiration;
 
     //convert secret key of JWT from Base64URL type to object SecretKey
     private SecretKey getSigninKey() {
@@ -28,19 +28,20 @@ public class JwtTokenProvider {
     // generate token from username
     public String generateToken(String username) {
         Date now = new Date();
-        Date dateExpiration = new Date(now.getTime() + jwtExpiration);
+        Date expiration = new Date(now.getTime() + jwtExpiration);
+
         String token  = Jwts.builder()
                 .setSubject(username)
                 .setIssuer("T")
                 .setIssuedAt(new Date())
-                .setExpiration(dateExpiration)
+                .setExpiration(expiration)
                 .signWith(getSigninKey())
                 .compact();
         return token;
     }
 
     // get Claims
-    public Claims extractAllClaims(String token) {
+    private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSigninKey())
@@ -73,8 +74,8 @@ public class JwtTokenProvider {
 
     // check valid
     public boolean isValid(String token, UserDetails userDetails) {
-        String username = userDetails.getUsername();
-        return userDetails.equals(userDetails.getUsername()) && !isExpiration(token);
+        String username = extractUsername(token);
+        return username.equals(userDetails.getUsername()) && !isExpiration(token);
     }
 
     // check validate about jwt

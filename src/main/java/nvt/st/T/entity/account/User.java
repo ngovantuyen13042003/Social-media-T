@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nvt.st.T.entity.BaseEntity;
 import nvt.st.T.entity.chats.Conversations;
+import nvt.st.T.entity.post.User_Page;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -34,7 +36,8 @@ public class User extends BaseEntity {
     private String company;
     private String address;
     private String school;
-    private Boolean enabled;
+    @Column(nullable = false)
+    private Boolean enabled ;   
     @ManyToOne
     @JoinColumn(name = "friend_id", referencedColumnName = "id", nullable = true)
     private User user;
@@ -50,4 +53,15 @@ public class User extends BaseEntity {
 
     @ManyToMany(mappedBy = "users")
     private Collection<Conversations> conversations;
+
+    @OneToOne(mappedBy = "user")
+    private Verification verification;
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
+    @OneToMany(mappedBy = "user")
+    private List<User_Page> userPages;
+
+
 }

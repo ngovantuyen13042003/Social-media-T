@@ -51,9 +51,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService{
             refreshTokenRepository.delete(refreshToken);
             throw new RefreshTokenException("Refresh token was expired. Please make a new signin request!");
         }
-
         return refreshToken;
     }
-
 
 }

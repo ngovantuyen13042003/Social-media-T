@@ -1,4 +1,4 @@
-package nvt.st.T.payload.response;
+package nvt.st.T.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

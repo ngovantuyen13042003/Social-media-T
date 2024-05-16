@@ -18,6 +18,7 @@ import java.util.List;
 
 
 public interface CrudService<Id, I, O> {
+
     ListResponse<O> findAll(int page, int size, String sort, String filter, String search, boolean all);
     O findById(Id id);
     O save(Id id, I request);
@@ -64,7 +65,7 @@ public interface CrudService<Id, I, O> {
         return mapper.entityToResponse(entity);
     }
 
-    default <E> O defaultSave(Id id,
+        default <E> O defaultSave(Id id,
                               I request,
                               JpaRepository<E, Id> repository,
                               GenericMapper<E, I, O> mapper,

@@ -12,7 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "refresh_token")
-public class RefreshToken extends BaseEntity {
+public class RefreshToken  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "token",unique = true, nullable = false)
     private String token;
     @OneToOne
@@ -20,4 +23,5 @@ public class RefreshToken extends BaseEntity {
     private User user;
     @Column(nullable = false)
     private Date expiryDate;
+
 }

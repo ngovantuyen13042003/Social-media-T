@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Setter
@@ -14,6 +15,7 @@ import java.util.Collection;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "roles")
 public class Role  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +23,9 @@ public class Role  {
     @Column(unique = true)
     @Enumerated(value = EnumType.STRING)
     private ERole name;
-    private String description;
+//    @Column(name = "description",nullable = true)
+//    private String description;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private Collection<User> users = new ArrayList<>();
 }

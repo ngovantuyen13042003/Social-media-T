@@ -1,13 +1,24 @@
-
 server:
   port: 8080
 spring:
+  #mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ngovantuyen13042003@gmail.com
+    password: sryq pvxu uzfb abwd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   application:
     name: T
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -26,3 +37,10 @@ com:
       jwtSecret: 4bb6d1dfbafb64a681139d1586b6f1160d18159afd57c8c79136d7490630407c
       jwtExpiration: 7200 # 7200 seconds = 2 hours
       jwtRefreshExpiration: 86400000
+
+cloudinary:
+  name: dbrorw5z0
+  apiKey: 117498647486942
+  apiSecret: 4qLcjBeIdjuS2CmuhaK4S3SDl_o
+  folderName: social_media_T
+

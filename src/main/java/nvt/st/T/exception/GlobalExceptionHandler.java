@@ -1,10 +1,12 @@
 package nvt.st.T.exception;
 
 
-import nvt.st.T.payload.response.ExceptionResponse;
+import nvt.st.T.dto.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
@@ -39,7 +41,11 @@ public class GlobalExceptionHandler {
     }
 
 
-
+    @ExceptionHandler({AuthenticationException.class, VerificationException.class, ExpiredTokenException.class})
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ExceptionResponse> authenticationException(AuthenticationException ex, WebRequest request) {
+        return handleException(ex, request, HttpStatus.UNAUTHORIZED);
+    }
 
 
 
